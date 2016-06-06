@@ -218,6 +218,9 @@ def build_parser():
         'WALE_GPG_KEY_ID')
 
     parser.add_argument(
+        '--log-level', action='store', default='',
+        help='Sets log level (Choices: DEBUG, INFO, WARNING, ERROR)')
+    parser.add_argument(
         '--terse', action='store_true',
         help='Only log messages as or more severe than a warning.')
 
@@ -515,6 +518,9 @@ def main():
     parser = build_parser()
     args = parser.parse_args()
     subcommand = args.subcommand
+
+    if args.log_level:
+        log_help.set_level(args.log_level)
 
     # Adjust logging level if terse output is set.
     if args.terse:
